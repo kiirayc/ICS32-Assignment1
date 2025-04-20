@@ -10,8 +10,10 @@ from notebook import *
 from command_parser import *
 import shlex
 
-if __name__ == "__main__":
-
+def main():
+    '''
+    Main function that handles user input and executes commands for managing notebooks. 
+    '''
     note = None #check the condition
     note_path = ""
     user_command = shlex.split(input(""))
@@ -35,7 +37,10 @@ if __name__ == "__main__":
             delete_note(user_command)
 
         elif user_command[0] == "O":
-            note_path, note = load_note(user_command)
+            try:
+                note_path, note = load_note(user_command)
+            except:
+                print("ERROR")
             
         elif user_command[0] == "E":
             if note == None: #a condition for when C or O commands are not issued 
@@ -54,3 +59,6 @@ if __name__ == "__main__":
 
         user_command = input("")
         user_command = shlex.split(user_command)
+
+if __name__ == "__main__":
+    main()

@@ -10,6 +10,16 @@ from notebook import *
 from pathlib import *
 
 def create_note(command, notebook):
+    '''
+    Creates a new notebook file and saves the notebook object to the specified file path.
+    Parameters:
+        command (list): List containing command arguments.
+        notebook (Notebook): The Notebook object to be saved.
+
+    Returns:
+        Path: The path of the created notebook file.
+    '''
+
     try:
         new_path = command[1] + "/" + command[3] + ".json"
     
@@ -33,6 +43,13 @@ def create_note(command, notebook):
 
 def delete_note(command):
 
+    '''
+    Deletes a notebook file based on the given command.
+
+    Parameters:
+        command (list): List containing command arguments.
+    '''
+
     while command:
         if '.json' in command[1]:
             new_path = command[1]        
@@ -52,6 +69,17 @@ def delete_note(command):
         command = input("")
 
 def load_note(command):
+    '''
+    Loads a notebook from the specified file if it exists and verifies the username and password.
+
+    Parameters:
+        command (list): List containing command arguments.
+
+    Returns:
+        Path: The path of the loaded notebook file.
+        Notebook: The loaded Notebook object.
+    '''
+
     if '.json' in command[1]:
         file_path = Path(command[1])
 
@@ -68,11 +96,19 @@ def load_note(command):
                 print(notebook.bio)
             else:
                 print("ERROR")
-                #Your program should use the path to the loaded notebook when saving changes.
                     
         return file_path, notebook
 
 def edit_note(command, notebook, path):
+
+    '''
+    Edits the properties of a notebook, such as username, password, bio, and diaries.
+
+    Parameters:
+        command (list): List containing command arguments.
+        notebook (Notebook): The Notebook object to be edited.
+        path (Path): The file path of the notebook being edited.
+    '''
 
     success = True
     delete_indices = []
@@ -117,6 +153,15 @@ def edit_note(command, notebook, path):
     notebook.save(path)
 
 def print_note(command, notebook):
+    '''
+    Prints the details of the notebook, such as username, password, bio, and diary entries, 
+    based on the provided command.
+
+    Parameters:
+        command (list): List containing command arguments.
+        notebook (Notebook): The Notebook object to be printed.
+    '''
+
     for idx in range(1, len(command)):
         try:
             if "-all" in command[idx]:
